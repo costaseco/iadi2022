@@ -6,7 +6,7 @@ import pt.unl.fct.di.iadi.iadi2022lab1.domain.UserDomainService
 @Service
 class UserService(val users:UserDomainService) {
 
-    fun userExists(name:String) = users.findUserByName(name)
+    fun userExists(name:String) = users.findUserByName(name) != null
 
     fun addUser(name:String) { users.addUser(name) }
 }

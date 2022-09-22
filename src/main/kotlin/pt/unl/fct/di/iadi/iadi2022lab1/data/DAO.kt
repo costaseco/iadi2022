@@ -4,4 +4,4 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
-data class User(@Id val number:Long, val name:String)
+data class UserDAO(@Id val number:Long, val name:String)
