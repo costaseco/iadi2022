@@ -4,5 +4,5 @@ class HelloController : HelloAPI {
 
     override fun helloWorld():String = "Hello! World!"
 
-    override fun sayHello(greeting: greetingRequest): String ="Hello, $greeting.name"
+    override fun sayHello(greeting: greetingRequest): greetingResponse = greetingResponse("Hello, $greeting.name")
 }

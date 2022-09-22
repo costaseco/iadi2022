@@ -10,5 +10,5 @@ interface HelloAPI {
     fun helloWorld():String
 
     @PostMapping("hello")
-    fun sayHello(@RequestBody name:greetingRequest):String
+    fun sayHello(@RequestBody name:greetingRequest): greetingResponse
 }
