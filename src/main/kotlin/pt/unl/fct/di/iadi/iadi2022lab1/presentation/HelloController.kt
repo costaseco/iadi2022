@@ -2,13 +2,9 @@ package pt.unl.fct.di.iadi.iadi2022lab1.presentation
 
 import org.springframework.web.bind.annotation.*
 
-@RestController
-@RequestMapping("/api")
-class HelloController {
+class HelloController : HelloAPI {
 
-    @GetMapping("helloworld")
-    fun helloWorld() = "Hello! World!"
+    override fun helloWorld():String = "Hello! World!"
 
-    @PostMapping("hello")
-    fun sayHello(@RequestBody name:String) = "Hello, $name"
+    override fun sayHello(@RequestBody name:String): String = "Hello, $name"
 }
