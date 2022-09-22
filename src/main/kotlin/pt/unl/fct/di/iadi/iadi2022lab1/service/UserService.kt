@@ -1,4 +1,12 @@
 package pt.unl.fct.di.iadi.iadi2022lab1.service
 
-class userService {
+import org.springframework.stereotype.Service
+import pt.unl.fct.di.iadi.iadi2022lab1.domain.UserDomainService
+
+@Service
+class UserService(val users:UserDomainService) {
+
+    fun userExists(name:String) = users.findUserByName(name)
+
+    fun addUser(name:String) { users.addUser(name) }
 }

@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.*
 interface HelloAPI {
 
     @GetMapping("helloworld")
-    fun helloWorld(): greetingResponse
+    fun helloWorld(): GreetingResponse
 
     @PostMapping("hello")
-    fun sayHello(@RequestBody greeting:greetingRequest): greetingResponse
+    fun sayHello(@RequestBody greeting:GreetingRequest): GreetingResponse
+
+    @PostMapping("users")
+    fun addUser(@RequestBody name:AddUserRequest)
 }
