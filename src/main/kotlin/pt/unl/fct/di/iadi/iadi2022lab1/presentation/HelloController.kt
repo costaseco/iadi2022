@@ -19,11 +19,7 @@ class HelloController(val app: GreetingApplication, val users:UserService) : Hel
         GreetingResponse(app.personalSalut(greeting.name))
 
     override fun addUser(@RequestBody register: AddUserRequest) {
-        try {
-            users.addUser(register.name)
-        } catch ( ex:InvalidParameterException ) {
-            throw ex
-        }
+        users.addUser(register.name)
     }
 
     @ResponseStatus(value=HttpStatus.BAD_REQUEST)

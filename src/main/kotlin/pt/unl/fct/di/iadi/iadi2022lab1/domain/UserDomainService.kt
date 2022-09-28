@@ -8,8 +8,6 @@ import java.security.InvalidParameterException
 @Service
 class UserDomainService(val users:UserRepository) {
 
-    fun findUserByName(name:String) = users.findByName(name).orElse(null)
-
     fun addUser(name:String) {
         if (name.length < 3)
             throw InvalidParameterException("Name must be longer than 3 characters.")
