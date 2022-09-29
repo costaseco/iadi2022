@@ -15,5 +15,7 @@ data class MessageDTO(
     @field:Schema(example = "This is the message...")
     val body:String)
 
-data class MessageListDTO(val id:Long, val to:String, val cc:String, val subject:String)
 data class MessageCreateDTO(val to:String, val cc:String, val subject:String, val body:String)
+
+data class MessageListDTO(val id:Long, val to:String, val cc:String, val subject:String)
+

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RequestMapping("messages")
-interface MessageAPI: ResourceAPI<Long,MessageDTO,MessageListDTO,MessageCreateDTO> {
+interface MessageAPI {
 
     @Operation(summary = "Get all messages")
     @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Found all resources", content = [
+        ApiResponse(responseCode = "200", description = "Found all messages", content = [
             (Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = MessageListDTO::class)))))]),
-        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()]),
-        ApiResponse(responseCode = "404", description = "Did not find any Foos", content = [Content()])]
+        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()])]
     )
-    override fun getAll(): Collection<MessageListDTO>
+    @GetMapping("")
+    fun getAll(): Collection<MessageListDTO>
 
     @Operation(summary = "Get one message given an Id")
     @ApiResponses(value = [
@@ -28,19 +28,33 @@ interface MessageAPI: ResourceAPI<Long,MessageDTO,MessageListDTO,MessageCreateDT
         ApiResponse(responseCode = "400", description = "Bad request", content = [Content()]),
         ApiResponse(responseCode = "404", description = "Did not find the sought message", content = [Content()])]
     )
-    override fun getOne(id: Long): Optional<MessageDTO>
+    @GetMapping("{id}")
+    fun getOne(id: Long): Optional<MessageDTO>
 
-    @Operation(summary = "Get one message given an Id")
+    @Operation(summary = "Add one message")
     @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Found the message", content = [
-            (Content(mediaType = "application/json", schema = Schema(implementation = MessageDTO::class)))]),
-        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()]),
-        ApiResponse(responseCode = "404", description = "Did not find the sought message", content = [Content()])]
+        ApiResponse(responseCode = "201", description = "Added the message", content = [Content()]),
+        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()])]
     )
-    override fun addOne(value: MessageCreateDTO)
+    @PostMapping("")
+    fun addOne(value: MessageCreateDTO):Unit
 
-    override fun updateOne(id: Long)
+    @Operation(summary = "Update one message")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "202", description = "Updated the message", content = [Content()]),
+        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()]),
+        ApiResponse(responseCode = "404", description = "Did not find any message", content = [Content()])]
+    )
+    @PutMapping("{id}")
+    fun updateOne(id: Long):Unit
 
-    override fun deleteOne(id: Long)
+    @Operation(summary = "Delete one message")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "202", description = "Deleted the message", content = [Content()]),
+        ApiResponse(responseCode = "400", description = "Bad request", content = [Content()]),
+        ApiResponse(responseCode = "404", description = "Did not find any message", content = [Content()])]
+    )
+    @DeleteMapping("{id}")
+    fun deleteOne(id: Long):Unit
 }
 
