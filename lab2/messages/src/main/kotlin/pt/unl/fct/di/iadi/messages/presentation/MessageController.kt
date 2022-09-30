@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
@@ -25,7 +27,7 @@ class MessageController : MessageAPI {
         TODO("Not yet implemented")
     }
 
-    override fun updateOne(id: Long) {
+    override fun updateOne(id: Long, value: MessageCreateDTO) {
         TODO("Not yet implemented")
     }
 

@@ -29,7 +29,7 @@ interface MessageAPI {
         ApiResponse(responseCode = "404", description = "Did not find the sought message", content = [Content()])]
     )
     @GetMapping("{id}")
-    fun getOne(id: Long): Optional<MessageDTO>
+    fun getOne(@PathVariable id: Long): Optional<MessageDTO>
 
     @Operation(summary = "Add one message")
     @ApiResponses(value = [
@@ -37,7 +37,7 @@ interface MessageAPI {
         ApiResponse(responseCode = "400", description = "Bad request", content = [Content()])]
     )
     @PostMapping("")
-    fun addOne(value: MessageCreateDTO):Unit
+    fun addOne(@RequestBody value: MessageCreateDTO):Unit
 
     @Operation(summary = "Update one message")
     @ApiResponses(value = [
@@ -46,7 +46,7 @@ interface MessageAPI {
         ApiResponse(responseCode = "404", description = "Did not find any message", content = [Content()])]
     )
     @PutMapping("{id}")
-    fun updateOne(id: Long):Unit
+    fun updateOne(@PathVariable id: Long, @RequestBody value:MessageCreateDTO):Unit
 
     @Operation(summary = "Delete one message")
     @ApiResponses(value = [
@@ -55,6 +55,6 @@ interface MessageAPI {
         ApiResponse(responseCode = "404", description = "Did not find any message", content = [Content()])]
     )
     @DeleteMapping("{id}")
-    fun deleteOne(id: Long):Unit
+    fun deleteOne(@PathVariable id: Long):Unit
 }
 
