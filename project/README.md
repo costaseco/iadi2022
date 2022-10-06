@@ -4,6 +4,7 @@
 ### Change log
 
 - 2022-10-04: Initial version, still up for discussion and receiving feedback,
+- 2022-10-06: 
 
 ## Introduction
 
