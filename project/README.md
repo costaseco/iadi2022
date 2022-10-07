@@ -3,8 +3,8 @@
 
 ### Change log
 
-- 2022-10-04: Initial version, still up for discussion and receiving feedback,
-- 2022-10-06: 
+- 2022-10-04: Initial version, still up for discussion and receiving feedback.
+- 2022-10-06: Added submission details and registration form.
 
 ## Introduction
 
@@ -77,6 +77,10 @@ To be released later
 
 - A manager can track the status of any package.
 
+## Working Teams 
+
+The project assignment should be done by teams of 4. If you cannot make a team of 4, talk to the instructor to authorize other solutions. 
+
 ## Deliverables
 
 All deliverables should be submitted by pushing them to the repository of the project in github classroom.
@@ -94,6 +98,12 @@ All deliverables should be submitted by pushing them to the repository of the pr
 - Report
 
 - Video with Demo
+
+### Submission details
+
+You should register your team in the following google forms. You will need to have a GitHub identifier (use the campus address to have the educational benefits).
+
+[https://forms.gle/1KkfATcL311ZR6Ns7](https://forms.gle/1KkfATcL311ZR6Ns7)
 
 ## Report Template
 
