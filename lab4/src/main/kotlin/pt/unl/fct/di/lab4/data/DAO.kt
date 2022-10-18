@@ -22,6 +22,15 @@ data class Store (
     override fun toString(): String ="Store(id=${id}, name=${name})"
 }
 
+
+@Entity
+data class Client (
+    @Id @GeneratedValue             val number:Long,
+                                    val name:String,
+    @OneToMany(mappedBy = "client") val orders:MutableList<Order>
+)
+
+
 @Entity
 data class OrderLine (
     @Id @GeneratedValue val id:Long,
@@ -29,13 +38,6 @@ data class OrderLine (
     @ManyToOne          val order:Order,
                         val quantity:Long,
                         val unitprice:Long,
-)
-
-@Entity
-data class Client (
-    @Id @GeneratedValue             val number:Long,
-                                    val name:String,
-    @OneToMany(mappedBy = "client") val orders:MutableList<Order>
 )
 
 @Entity
