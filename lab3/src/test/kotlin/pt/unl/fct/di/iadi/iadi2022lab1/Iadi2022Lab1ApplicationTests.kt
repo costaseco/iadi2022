@@ -4,7 +4,6 @@ package pt.unl.fct.di.iadi.iadi2022lab1
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
@@ -64,7 +63,8 @@ class Iadi2022Lab1ApplicationTests {
 
     @Test
     fun `saying hello to Maria`() {
-        mvc.post(greetingURL) {
+        mvc
+        .post(greetingURL) {
             accept = MediaType.APPLICATION_JSON
             content = mapper.writeValueAsString(GreetingRequest("Maria"))
             contentType = MediaType.APPLICATION_JSON
@@ -78,17 +78,19 @@ class Iadi2022Lab1ApplicationTests {
 
     @Test
     fun `with mock service`() {
-        Mockito.`when`(userService.userExists(anyString())).thenAnswer { it.arguments[0] == "Maria" }
+        Mockito
+            .`when`(userService.userExists(anyString()))
+            .thenAnswer { it.arguments[0] == "Maria" }
 
         mvc.post(greetingURL) {
             accept = MediaType.APPLICATION_JSON
             content = mapper.writeValueAsString(GreetingRequest("Maria"))
             contentType = MediaType.APPLICATION_JSON
         }
-            .andExpect {
-                status { isOk() }
-                content { contentType(MediaType.APPLICATION_JSON)}
-                content { json(mapper.writeValueAsString(GreetingResponse("Hello, Maria!"))) }
-            }
+        .andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON)}
+            content { json(mapper.writeValueAsString(GreetingResponse("Hello, Maria!"))) }
+        }
     }
 }
