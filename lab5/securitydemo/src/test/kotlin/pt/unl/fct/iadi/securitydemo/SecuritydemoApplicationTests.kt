@@ -3,8 +3,6 @@ package pt.unl.fct.iadi.securitydemo
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.ArgumentMatchers.isA
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -19,7 +17,11 @@ import org.springframework.test.web.servlet.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 
 import org.hamcrest.Matchers.*
+import org.mockito.ArgumentMatchers.*
 import org.springframework.test.web.servlet.delete
+import pt.unl.fct.iadi.securitydemo.data.Message
+import pt.unl.fct.iadi.securitydemo.data.MessageRepository
+import java.util.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -28,6 +30,17 @@ class SecuritydemoApplicationTests {
 
     @Autowired
     lateinit var mvc: MockMvc
+
+    @MockBean
+    lateinit var messages: MessageRepository
+
+    companion object {
+        val initialMessages = mutableListOf(
+            Message(1, "a@a.com", "b@b.com", "Message 1"),
+            Message(2, "b@b.com", "c@c.com", "Message 2"),
+            Message(3, "c@c.com", "a@a.com", "Message 3"),
+        )
+    }
 
     @Test
     fun `say hello`() {
@@ -52,6 +65,9 @@ class SecuritydemoApplicationTests {
     @Test
     @WithMockUser(username="user",roles= arrayOf("USER"))
     fun `see Messages`() {
+
+        Mockito.`when`(messages.findAll()).thenReturn(initialMessages)
+
         mvc.get("/api/messages") {
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
@@ -64,6 +80,10 @@ class SecuritydemoApplicationTests {
     @Test
     @WithMockUser(username="a@a.com",roles= arrayOf("USER"))
     fun `delete my Message`() {
+
+        Mockito.`when`(messages.findById(anyLong())).thenReturn(Optional.of(initialMessages[0]))
+        Mockito.`when`(messages.delete(any())).then { println("Deleted") } // Ignoring the behaviour, testing only security
+
         mvc.delete("/api/messages/1") {
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
@@ -74,10 +94,28 @@ class SecuritydemoApplicationTests {
     @Test
     @WithMockUser(username="b@b.com",roles= arrayOf("USER"))
     fun `delete not my Message`() {
+
+        Mockito.`when`(messages.findById(anyLong())).thenReturn(Optional.of(initialMessages[0]))
+        Mockito.`when`(messages.delete(any())).then { println("Deleted") } // Ignoring the behaviour, testing only security
+
         mvc.delete("/api/messages/1") {
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isForbidden() }
+        }
+    }
+
+    @Test
+    @WithMockUser(username="c@c.com",roles= arrayOf("ADMIN"))
+    fun `delete Message by Admin`() {
+
+        Mockito.`when`(messages.findById(anyLong())).thenReturn(Optional.of(initialMessages[0]))
+        Mockito.`when`(messages.delete(any())).then { println("Deleted") } // Ignoring the behaviour, testing only security
+
+        mvc.delete("/api/messages/1") {
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
         }
     }
 

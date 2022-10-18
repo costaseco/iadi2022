@@ -18,11 +18,16 @@ package pt.unl.fct.iadi.securitydemo.configuration.securityService
 
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Component
+import pt.unl.fct.iadi.securitydemo.data.MessageRepository
 
 @Component("mySecurityService")
-class SecurityService {
+class SecurityService(
+    val messages: MessageRepository
+) {
 
     fun myMessage(principal: User, id:Long): Boolean {
-        return id == 1L // Temporary
+        val msg = messages.findById(id)
+
+        return msg.get().from == principal.username
     }
 }

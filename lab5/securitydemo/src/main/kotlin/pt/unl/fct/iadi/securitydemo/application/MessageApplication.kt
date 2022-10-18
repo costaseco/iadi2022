@@ -17,34 +17,30 @@ limitations under the License.
 package pt.unl.fct.iadi.securitydemo.application
 
 import org.springframework.stereotype.Service
+import pt.unl.fct.iadi.securitydemo.data.Message
+import pt.unl.fct.iadi.securitydemo.data.MessageRepository
 import pt.unl.fct.iadi.securitydemo.presentation.MessageDTO
 
 @Service
-class MessageApplication {
+class MessageApplication(
+    val messages:MessageRepository
+    ) {
 
-    companion object {
-        val messages = mutableListOf(
-            MessageDTO(1, "a@a.com", "b@b.com", "Message 1"),
-            MessageDTO(2, "b@b.com", "c@c.com", "Message 2"),
-            MessageDTO(3, "c@c.com", "a@a.com", "Message 3"),
-        )
+    fun getAll() = messages.findAll()
+
+    fun addOne(from:String, to:String, content:String) {
+        messages.save(Message(0, from, to, content))
     }
 
-    fun getAll() = messages
+    fun getOne(id: Long) = messages.findById(id)
 
-    fun addOne(message: MessageDTO) {
-        messages.add(message)
-    }
-
-    fun getOne(id: Int) = messages[id]
-
-    fun count() = messages.size
+    fun count() = messages.count()
 
     fun clear() {
-        messages.removeAll { true }  // a block { E } is like a lambda (it -> E)
+        messages.deleteAll()
     }
 
     fun delete(id: Long) {
-        messages.removeAll { it.id == id }
+        messages.deleteById(id)
     }
 }

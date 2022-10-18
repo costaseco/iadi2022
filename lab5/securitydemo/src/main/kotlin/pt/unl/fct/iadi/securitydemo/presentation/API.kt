@@ -23,9 +23,12 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import pt.unl.fct.iadi.securitydemo.configuration.securityRules.CanDeleteMyMessages
+import pt.unl.fct.iadi.securitydemo.data.Message
 
-
-data class MessageDTO(val id:Long, val from:String, val to:String, val content:String)
+data class MessageCreateDTO(val from:String, val to:String, val content:String)
+data class MessageDTO(val id:Long, val from:String, val to:String, val content:String) {
+    constructor(message: Message) : this(message.id, message.from, message.to, message.content)
+}
 
 @RequestMapping("")
 interface HelloAPI {
@@ -41,10 +44,10 @@ interface MessageAPI {
     fun getAll():Collection<MessageDTO>
 
     @PostMapping("")
-    fun addOne(@RequestBody message:MessageDTO):Unit
+    fun addOne(@RequestBody message:MessageCreateDTO):Unit
 
     @GetMapping("{id}")
-    fun getOne(@PathVariable id:Int):MessageDTO
+    fun getOne(@PathVariable id:Long):MessageDTO
 
     @DeleteMapping("{id}")
     @CanDeleteMyMessages
@@ -55,7 +58,7 @@ interface MessageAPI {
 interface AdminAPI {
 
     @GetMapping("dashboard")
-    fun dashboard():Int
+    fun dashboard():Long
 
     @PostMapping("messages")
     fun reset():Unit

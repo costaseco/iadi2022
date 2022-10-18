@@ -7,6 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize
 annotation class CanDeleteMyMessages {
     companion object {
         @Language("SpEL")
-        const val condition = "@mySecurityService.myMessage(principal,#id)"
+        const val condition = "hasRole('ADMIN') OR @mySecurityService.myMessage(principal,#id)"
     }
 }

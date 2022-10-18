@@ -27,13 +27,13 @@ class HelloController : HelloAPI {
 @RestController
 class MessageController(val app: MessageApplication) : MessageAPI {
 
-    override fun getAll(): Collection<MessageDTO> = app.getAll()
+    override fun getAll(): Collection<MessageDTO> = app.getAll().map { MessageDTO(it) }
 
-    override fun addOne(message: MessageDTO) {
-        app.addOne(message)
+    override fun addOne(message: MessageCreateDTO) {
+        app.addOne(message.from, message.to, message.content)
     }
 
-    override fun getOne(id: Int) = app.getOne(id)
+    override fun getOne(id: Long): MessageDTO = MessageDTO(app.getOne(id).get())
 
     override fun delete(id: Long) = app.delete(id)
 }
