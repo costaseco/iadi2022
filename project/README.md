@@ -95,6 +95,8 @@ The user stories should be presented in an IFML diagram (or several IFML diagram
 
 The scale is of 12 to 16 histories for groups with 3 or 4, and 8 to 12 for groups of 1 or 2. This means that 12 stories will earn 80% of the grade, each extra story is worth 5% more (all other criteria apply with relation to this). Nevertheless, the stories should provide a continuous line of action in the application.
 
+All data that is not introduced in these stories should be provided as seed data. Recall that demos are better understood with plasible data, so make an effort to populate your database with enough convenient information.
+
 ### Examples of security rules
 
 - A client can create a shipment.
