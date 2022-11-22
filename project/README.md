@@ -7,6 +7,7 @@
 - 2022-10-06: Added submission details and registration form.
 - 2022-10-11: Incorporated answers to questions from discord 
 - 2022-11-18: Added the requirements for the client side application. (tagged with (**NEW**))
+- 2022-11-22: Clearer technical requirements and improved user stories (tagged with (**NEW**))
 
 ## Introduction
 
@@ -75,7 +76,7 @@ The client application should implement the following user stories:
 
 8. As a signed-in client, I want to access the details of a shipment to send a message related to the package and seeing the message in the message list.
 
-9. As a signed-in warehouse worker, I want to see the list of packages in my warehouse to filter the list by status and see the filtered list of packages.
+9. As a signed-in warehouse worker, I want to see the list of packages in my warehouse to filter the list by status (**NEW**) **destination, and date** and see the filtered list of packages.
 
 10. As a signed-in warehouse worker, I want to see the filtered list of packages in my warehouse to select a package and see the details of the package.
 
@@ -83,7 +84,7 @@ The client application should implement the following user stories:
 
 12. As a signed-in warehouse worker, I want to access the details of a package to assign it to a truck and see the changes in the list of packages of the truck.
 
-13. As a signed-in truck driver, I want to I want to see the list of packages in my truck to filter the list by location and see the filtered list of packages.
+13. As a signed-in truck driver, I want to I want to see the list of packages in my truck to filter the list by (**NEW**) **destination, and date** and see the filtered list of packages.
 
 14. As a signed-in truck driver, I want to access the details of a package to assign it to a warehouse and see the changes in the list of packages of the warehouse.
 
@@ -96,6 +97,8 @@ The user stories should be presented in an IFML diagram (or several IFML diagram
 The scale is of 12 to 16 histories for groups with 3 or 4, and 8 to 12 for groups of 1 or 2. This means that 12 stories will earn 80% of the grade, each extra story is worth 5% more (all other criteria apply with relation to this). Nevertheless, the stories should provide a continuous line of action in the application.
 
 All data that is not introduced in these stories should be provided as seed data. Recall that demos are better understood with plasible data, so make an effort to populate your database with enough convenient information.
+
+(**NEW**) The application should be implemented using the React and Redux framework and TypeScript. The connection to the server should be performed with generated code using OpenAPI 3.0 tools (swagger editor or corresponding command line tools). The client application should implement the security rules in connection to the server-side application.
 
 ### Examples of security rules
 
@@ -192,4 +195,4 @@ First submission: 2022-11-01
 
 Second submission: 2022-11-30
 
-() Evaluation: 2022-12-19 to 2022-12-21
+Evaluation: 2022-12-19 to 2022-12-21
